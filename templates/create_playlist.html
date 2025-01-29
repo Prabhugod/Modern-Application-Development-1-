@@ -1,0 +1,60 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Create Album - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+h3 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.box_create_playlist {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 600px;
+    height: 280px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h3>
+    Create Album
+</h3>
+<div class="box_create_playlist">
+    <div class="insidebox1">
+        <div class="insidebox1">
+            <form method="post" enctype="multipart/form-data" >
+                <div class="mb-3" style="font-size: 21px; text-align: left;">
+                        <label for="playlistname" class="form-label">Playlist Name </label>
+                        <input type="text" name="name" class="form-control" id="name" aria-describedby="playlistname"
+                        placeholder="Enter your playlist name" required>
+
+
+                        <label for="thumbnailFile" class="form-label">Thumbnail File </label>
+                        <input type="file" name="thumbnail_file" class="form-control" id="thumbnailFile" required >
+
+                        
+                </div>
+
+                <div class="insidebox" style="margin-top:40px;">
+                    <button type="submit" class="btn btn-secondary" style="width: 110px;height: 40px;font-size: 20px;">
+                        Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

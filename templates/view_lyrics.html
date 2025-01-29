@@ -1,0 +1,172 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+View Lyrics - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    h5 {
+        margin-top: 7px;
+        margin-bottom: 7px;
+        font-size: 18px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .song-details-container {
+        display: flex;
+        background-color: #E1E1E1;
+        color: black;
+        border-color: black;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid;
+        width: 1000px;
+        height: auto;
+        margin: auto;
+        border-radius: 10px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+    .song-details-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        width: 50%;
+        border: 1px solid;
+        width: 200px;
+        height: 150px;
+        border-radius: 10px;
+        font-family: 'Akaya Kanadaka', sans-serif
+    }
+
+    .lyrics {
+        flex: 1;
+        margin-right: 20px;
+        width: 50%;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .song-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h3>View </h3>
+<div class="song-details-container">
+    <div class="song-details-info">
+        <h5>Song Name: {{ song.name }}</h5>
+        <h5>Creator: {{ song.creator.artist_name }}</h5>
+        <h5>Release Date: {{ song.release_date.year }}</h5>
+    </div>
+    <div class="lyrics">
+        <pre>{{ lyrics_content }}</pre>
+    </div>
+    <div class="song-details">
+        <div class="thumbnail">
+            <img src="{{ url_for('static', filename=song.thumbnail_path.split('static')[1].replace('\\', '/')) }}"
+                alt="Song Thumbnail" width="200" height="200">
+        </div>
+        <div class="audio-player">
+            <audio controls style="width: 250px;">
+                <source src="{{ url_for('static', filename=song.song_path.split('static')[1].replace('\\', '/')) }}"
+                    type="audio/mp3">
+            </audio>
+        </div>
+        <div class="rating">
+            <button id="rateButton" class="btn btn-secondary">Rate Song</button>
+        </div>
+            <!-- Add a hidden modal for the rating input -->
+            <div id="ratingModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h4>Rate the Song</h4>
+                    <form id="ratingForm">
+                        <label for="rating">Select a rating:</label>
+                        <select id="rating" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    // JavaScript code to handle the modal and form submission
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the modal
+        var modal = document.getElementById('ratingModal');
+    
+        // Get the button that opens the modal
+        var btn = document.getElementById('rateButton');
+    
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+    
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = 'block';
+        }
+    
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+    
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    
+        // Handle form submission
+        var form = document.getElementById('ratingForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var rating = document.getElementById('rating').value;
+    
+            // Use JavaScript (e.g., fetch or XMLHttpRequest) to send the rating to the server
+            // and update the database.
+    
+            // Getting request for rate song  
+            fetch('/rate_song', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rating: rating, song_id: '{{ song.song_id }}' }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the UI or perform additional actions as needed
+                modal.style.display = 'none'; // Close the modal after submission
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+    </script>
+{% endblock %}

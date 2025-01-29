@@ -1,0 +1,74 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+ Profile - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1,h3{
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+    
+    <h1>Profile
+        <small class="text-muted"> (@{{user.username}})</small>
+    </h1>
+    <h3>Edit Profile</h3>
+    <div class="box_register_creator">
+        <div class="insidebox1">
+            <div class="insidebox1">
+                <form method="post">
+                    <div class="mb-3" style="font-size: 21px; text-align: left;">
+                        <label for="exampleInputEmail1" class="form-label">Email id</label>
+                        <input type="email" name="emailid" placeholder="name@domain.com" class="form-control"
+                            id="exampleInputEmail1" aria-describedby="emailHelp" value="{{user.email}}" required>
+    
+            
+    
+    
+                        <label for="Username" class="form-label">Username </label>
+                        <input type="text" name="username" placeholder="Give a suitable UserName" class="form-control"
+                            id="usernamepage" aria-describedby="usernameHelp" value="{{user.username}}" required>
+                        
+    
+                       
+    
+                        <label for="Name" class="form-label">Name </label>
+                        <input type="text" name="name" placeholder="Enter Your Given Name" class="form-control"
+                            id="namepage" aria-describedby="nameHelp" value="{{user.name}}" required>
+    
+                        
+    
+                        <label for="exampleInputPassword1" class="form-label">Password </label>
+                        <input type="password" name="password" placeholder="Enter your password here" class="form-control"
+                            id="InputPassword" required>
+                        
+                        <br>
+
+                        <h5>Register yourself as a creator?</h5>
+                        
+                        <label class="form-check-label" for="inlineRadio1">Yes</label>
+                        <input class="form-check-input" type="radio" name="option1" id="inlineRadio1" value="yes">
+                          
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                        <input class="form-check-input" type="radio" name="option2" id="inlineRadio2" value="no">
+
+                    </div>
+    
+                        <div class="insidebox" style="margin-top:40px;">
+                                <button type="submit" class="btn btn-secondary"
+                                    style="width: 110px;height: 40px;font-size: 20px;">
+                                    Register</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

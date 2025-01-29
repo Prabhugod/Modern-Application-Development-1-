@@ -1,0 +1,100 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Home - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1,
+    h4 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .summary-box {
+        display: inline-flex;
+        justify-content: space-between;
+        background-color: #E1E1E1;
+        color: black;
+        border-color: black;
+        align-items: center;
+        flex-direction: column;
+        width: 200px;
+        margin-top: 30px;
+        margin: 10px;
+        margin-left: 70px;
+        padding: 20px;
+        border: 1px solid;
+        border-radius: 10px;
+        text-align: center;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+
+    .top_song{
+        padding: 20px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+    table {
+        font-family: 'Akaya Kanadaka', sans-serif;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .graph-box {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>App Performance</h1>
+<h4 class="text-muted">Summary Statistics</h4>
+<div class="summary-box">
+    <h3>General Users</h3>
+    <p>{{ total_users }}</p>
+</div>
+
+<div class="summary-box">
+    <h3>Creators</h3>
+    <p>{{ total_creators }}</p>
+</div>
+
+<div class="summary-box">
+    <h3>Tracks</h3>
+    <p>{{ total_tracks }}</p>
+</div>
+
+<div class="summary-box">
+    <h3>Albums</h3>
+    <p>{{ total_albums }}</p>
+</div>
+
+<div class="summary-box">
+    <h3>Genres</h3>
+    <p>{{ total_genres }}</p>
+</div>
+
+<h2 class="graph-box">Graphs</h2>
+<div class="graph-box">
+    <img src="data:image/png;base64,{{ song_statistics_graph|safe }}" alt="Song Statistics Graph">
+    <img src="data:image/png;base64,{{ pie_chart_image }}" alt="User Distribution Pie Chart">
+</div>
+
+<h2>Top 10 Song</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <ul>
+        <div class="top_song">
+            {% for song, average_rating in top_rated_songs %}
+            <li> {{ song.name }} </li>
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+{% endblock %}

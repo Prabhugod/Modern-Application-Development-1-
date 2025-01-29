@@ -1,0 +1,56 @@
+{% extends 'base_layout.html'%}
+
+{% block title %}
+Creators - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1,
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .inside {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Creators</h1>
+<hr>
+
+<div class="box">
+    <table class='inside'>
+        <thead>
+            <tr>
+                <th>Creators Names</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for creator in creators %}
+            <tr>
+                <td class="creator-name">{{ creator.artist_name }}</td>
+                <td>
+                    <form action="{{ url_for('toggle_blacklist', creator_id=creator.creator_id) }}" method="POST">
+                        {% if creator.Flag %}
+                        <button type="submit" class='btn btn-success'>Whitelist</button>
+                        {% else %}
+                        <button type="submit" class='btn btn-danger'>Blacklist</button>
+                        {% endif %}
+                    </form>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

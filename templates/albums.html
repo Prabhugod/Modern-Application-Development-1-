@@ -1,0 +1,66 @@
+{% extends 'base_layout.html'%}
+
+{% block title %}
+    Albums - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1,
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .inside {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Albums</h1>
+<hr>
+
+{% for creator in creators %}
+    <h3 class="text-muted">{{ creator.artist_name }}</h3>
+    <hr>
+    <div class="box">
+        <table class='inside'>
+            <thead>
+                <tr>
+                    <th>Album Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for album in creator.albums %}
+                    <tr>
+                        <td class="album-name">{{ album.name }}</td>
+                        <td>
+                            <a href="{{ url_for('view_album', album_id=album.album_id) }}">
+                                <button type="submit" class='btn btn-secondary'
+                                    style="width: 110px;height: 40px;font-size: 19px; border: none">View </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('delete_album_admin', album_id=album.album_id) }}">
+                                <button type="submit" class='btn btn-danger'
+                                    style="width: 110px;height: 40px;font-size: 19px; border: none">Remove</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+{% endfor %}
+
+{% endblock %}

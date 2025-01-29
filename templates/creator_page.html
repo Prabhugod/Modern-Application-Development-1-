@@ -1,0 +1,194 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+{{user.username}} creator - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+    
+   .dashboard {
+        margin-left: 370px;
+        font-size: 35px;
+        margin-top: 20px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+    
+    .song-name {
+        font-size: 24px;
+    }
+
+    .inside {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+        width: 50%;
+        margin-top: 50px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+    
+    .box {
+        justify-content: space-between;
+        width: 50%;
+        margin-top: 40px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+    .myButton {
+        background-color: #08fa08;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 40px;
+        margin: auto;
+        cursor: pointer;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .myButton:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if user %}
+{% if song_count >= 1 %}
+<h2 class="dashboard"> Dashboard</h2>
+<div class='header'>
+    <div class = 'box'>
+        <h3> Total Songs  </h3>
+        <h3 class="text-muted"> {{song_count}} </h3>
+    </div>
+    <div class = 'box'>
+        <h3> Average Rating</h3>
+        <h3 class="text-muted"> {{avg_rating}} </h3>
+    </div>
+    <div class = 'box'>
+        <h3> Total Albums</h3>
+        <h3 class="text-muted"> {{album_count}} </h3>
+    </div>
+</div>
+<div class='header'>
+    <h2>Song Uploads</h2>
+    <a href="{{ url_for('upload_song') }}"> <button class='btn btn-secondary'> Upload </button>
+    </a>
+</div>
+<table class='inside'>
+    <thead>
+        <tr>
+            <th> Song Names </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in creator_songs %}
+        <tr>
+            <td class="song-name"> {{ song.name}} </td>
+            <td>
+                <a href="{{ url_for('view_lyrics', song_id = song.song_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">View</button>
+                </a>
+
+            </td>
+            <td>
+                <a href="{{ url_for('edit_song', song_id = song.song_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">Edit</button>
+                </a>
+
+            </td>
+            <td>
+                <a href="{{ url_for('delete_song', song_id = song.song_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">Delete</button>
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class='header'>
+    <h2>Album Uploads</h2>
+    <a href="{{ url_for('create_album') }}"> <button class='btn btn-secondary'> Add Album</button>
+    </a>
+</div>
+<table class='inside'>
+    <thead>
+        <tr>
+            <th> Album Names </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for album in album_names %}
+        <tr>
+            <td class="song-name"> {{ album.name}} </td>
+            
+            <td>
+                <a href="{{ url_for('add_song', album_id = album.album_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">Add Song</button>
+                </a>
+
+            </td>
+
+            <td>
+                <a href="{{ url_for('view_song', album_id = album.album_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">View </button>
+                </a>
+
+            </td>
+            <td>
+                <a href="{{ url_for('edit_album', album_id = album.album_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">Edit</button>
+                </a>
+
+            </td>
+            <td>
+                <a href="{{ url_for('delete_album', album_id = album.album_id) }}">
+                    <button type="submit" class='btn btn-secondary'
+                        style="width: 110px;height: 40px;font-size: 19px; border: none">Delete</button>
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div>
+    <h1>Kickstart your creators journey <br>
+        Start uploading your songs
+    </h1>
+</div>
+
+<div>
+    <a href="{{url_for('upload_song')}}">
+        <button class="myButton">+</button>
+    </a>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

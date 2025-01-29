@@ -1,0 +1,86 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Edit Album - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .box_edit_album {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 600px;
+    height: 430px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h3>Edit Album</h3>
+<div class="box_edit_album">
+    <div class="insidebox1">
+        <div class="insidebox1">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3" style="font-size: 21px; text-align: left;">
+                    <label for="Albumname" class="form-label">Album Name </label>
+                    <input type="text" name="name" class="form-control" id="name" aria-describedby="albumname"
+                    value="{{album.name}}" required>
+
+
+                    <label for="thumbnailFile" class="form-label">Thumbnail File </label>
+                    <input type="file" name="thumbnail_file" class="form-control" id="thumbnailFile" required >
+
+
+                    <label for="date" class="form-label">Release Date </label>
+                    <input type="date" name="release_date" placeholder='dd-mm-yyyy' class="form-control"
+                    id="release_date" aria-describedby="dateHelp" required>
+
+                    
+                    <label for="selectGenre" class="form-label">Genre</label>
+                    <select name="genre" class="form-select" id="selectGenre" required>
+                    <option value="" disabled selected>Select a genre</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Hip-Hop">Hip-Hop</option>
+                    <option value="Rap">Rap</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="R&B">R&B</option>
+                    <option value="Country">Country</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Blues">Blues</option>
+                    <option value="Reggae">Reggae</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Folk">Folk</option>
+                    <option value="World">World</option>
+                    <option value="Gospel">Gospel</option>
+                    <option value="Dance">Dance</option>
+                    <option value="Reggaeton">Reggaeton</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Punk">Punk</option>
+                </select>
+
+                </div>
+
+                <div class="insidebox" style="margin-top:40px;">
+                    <button type="submit" class="btn btn-secondary" style="width: 110px;height: 40px;font-size: 20px;">
+                        Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

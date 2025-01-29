@@ -1,0 +1,66 @@
+{% extends 'base_layout.html'%}
+
+{% block title %}
+Tracks - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h1,
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .inside {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>All Tracks</h1>
+<hr>
+
+{% for genre, genre_songs in songs|groupby('genre') %}
+<h3 class="text-muted">{{ genre }}</h3>
+<hr>
+<div class="box">
+    <table class='inside'>
+        <thead>
+            <tr>
+                <th>Song Name</th>
+                <th>Creator</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in genre_songs %}
+            <tr>
+                <td class="song-name">{{ song.name }}</td>
+                <td>{{ song.creator.artist_name }}</td>
+                <td>
+                    <a href="{{ url_for('view_lyrics', song_id=song.song_id) }}">
+                        <button type="submit" class='btn btn-secondary'
+                            style="width: 110px;height: 40px;font-size: 19px; border: none">View </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('delete_song_admin', song_id = song.song_id) }}">
+                        <button type="submit" class='btn btn-danger'
+                            style="width: 110px;height: 40px;font-size: 19px; border: none">Delete</button>
+                    </a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+</div>
+{% endfor %}
+{% endblock %}

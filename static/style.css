@@ -1,0 +1,120 @@
+body {
+    background-color: #ffffff;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+  }
+
+  .header {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 45px;
+    font-style: italic;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 80px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+
+}
+
+.box_welcome_page {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.box_user_login {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 400px;
+    height: 350px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.box_register_user {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 400px;
+    height: 500px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.box_admin_login {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.box_register_creator {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 400px;
+    height: 530px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.box_upload_song {
+    background-color: #E1E1E1;
+    color: black;
+    border-color: black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid ;
+    width: 600px;
+    height: 740px;
+    margin: auto;
+    border-radius: 10px;
+    font-family: 'Akaya Kanadaka', sans-serif;
+}
+
+.insidebox {
+    font-size: 27px;
+    margin-bottom: 70px;
+    margin-top: 30px;
+}
+
+.insidebox1 {
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+

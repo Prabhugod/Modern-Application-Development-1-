@@ -1,0 +1,135 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Home - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h2 {
+        margin-top: 20px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+    .playlist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .song_display_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #E1E1E1;
+        color: black;
+        border-color: black;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid;
+        width: 200px;
+        height: 300px;
+        margin: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+
+    .song_display_container img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+
+    .song_display_container p {
+        font-size: 20px;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+
+    .song_display_container button {
+        width: 110px;
+        height: 40px;
+        font-size: 19px;
+        border: none;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<h2>Top Songs</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    {% for song, average_rating in top_rated_songs %}
+    <div class="song_display_container" style='height: 324px;' >
+        <img src="{{ url_for('static', filename=song.thumbnail_path.split('static')[1].replace('\\', '/')) }}"
+            alt="{{ song.name }} Thumbnail">
+        <p> {{ song.name }} </p>
+        <p> Rating: {{ average_rating }} </p>
+        <a href="{{ url_for('view_lyrics', song_id=song.song_id) }}">
+            <button type="submit" class='btn btn-secondary'>View</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="playlist">
+    <h2>Your Playlists</h2>
+    <a href="{{ url_for('create_playlist') }}" style="text-decoration: none;">
+        <button type="submit" class="btn btn-secondary">Create Playlist</button>
+    </a>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    {% for playlist in user.playlists %}
+    <div class="song_display_container">
+        <img src="{{ url_for('static', filename=playlist.thumbnail_path.split('static')[1].replace('\\', '/')) }}"
+            alt="{{ playlist.name }} Thumbnail">
+        <p>{{ playlist.name }}</p>
+        <a href="{{ url_for('view_playlist', playlist_id=playlist.playlist_id) }}">
+            <button type="submit" class='btn btn-secondary'>View</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% set songs_by_genre = {} %}
+
+{# Collect songs based on genre #}
+{% for song in songs %}
+{% set _ = songs_by_genre.setdefault(song.genre, []).append(song) %}
+{% endfor %}
+
+{# Iterate over genres and their associated songs #}
+{% for genre, songs in songs_by_genre.items() %}
+<h2>{{ genre }}</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    {% for song in songs %}
+    <div class="song_display_container">
+        <img src="{{ url_for('static', filename=song.thumbnail_path.split('static')[1].replace('\\', '/')) }}"
+            alt="{{ song.name }} Thumbnail">
+        <p>{{ song.name }}</p>
+        <a href="{{ url_for('view_lyrics', song_id=song.song_id) }}">
+            <button type="submit" class='btn btn-secondary'>View</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+
+<h2>Albums</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    {% for album in all_albums %}
+    <div class="song_display_container">
+        <img src="{{ url_for('static', filename=album.thumbnail_path.split('static')[1].replace('\\', '/')) }}"
+            alt="{{ album.name }} Thumbnail">
+        <p>{{ album.name }}</p>
+        <a href="{{ url_for('view_album', album_id=album.album_id) }}">
+            <button type="submit" class='btn btn-secondary'>View</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

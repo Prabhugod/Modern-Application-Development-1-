@@ -1,0 +1,59 @@
+{% extends "base_layout.html" %}
+
+{% block title %}
+   register Page - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+  
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <a href="{{url_for('home')}}" style="color: black; text-decoration: none"> Music Streaming App </a>
+</div>
+
+<div class="box_register_user">
+
+    <div class="insidebox1">
+        Register User
+    </div>
+    <div class="insidebox1">
+        <div class="insidebox1">
+            <form method="post">
+                <div class="mb-3" style="font-size: 21px; text-align: left;">
+                    <label for="exampleInputEmail1" class="form-label">Email id</label>
+                    <input type="email" name="emailid" placeholder="name@domain.com" class="form-control"
+                        id="exampleInputEmail1" aria-describedby="emailHelp" required>
+
+        
+
+
+                    <label for="Username" class="form-label">Username </label>
+                    <input type="text" name="username" placeholder="Give a suitable UserName" class="form-control"
+                        id="usernamepage" aria-describedby="usernameHelp" required>
+                    
+
+                   
+
+                    <label for="Name" class="form-label">Name </label>
+                    <input type="text" name="name" placeholder="Enter Your Given Name" class="form-control"
+                        id="namepage" aria-describedby="nameHelp" required>
+
+                    
+
+                    <label for="exampleInputPassword1" class="form-label">Password </label>
+                    <input type="password" name="password" placeholder="Enter your password here" class="form-control"
+                        id="InputPassword" required>
+                </div>
+
+                    <div class="insidebox" style="margin-top:40px;">
+                            <button type="submit" class="btn btn-secondary"
+                                style="width: 110px;height: 40px;font-size: 20px;">
+                                SignUp</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

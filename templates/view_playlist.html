@@ -1,0 +1,69 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+View Song - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .box_display_song {
+        background-color: #E1E1E1;
+        color: black;
+        border-color: black;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid;
+        width: 650px;
+        height: auto;
+        margin: auto;
+        border-radius: 10px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h2>View Songs</h2>
+    <div class="box_display_song">
+        <div class="insidebox1">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ url_for('static', filename=playlist.thumbnail_path.split('static')[1].replace('\\', '/')) }}" alt="{{ playlist.name }} Thumbnail"
+                    style="width: 600px; height: 200px;">
+                <h3>{{ playlist.name }}</h3>
+                <a href="{{ url_for('add_song_to_playlist', playlist_id=playlist.playlist_id) }}" >
+                    <button type="submit" class="btn btn-secondary">Add Song</button>
+                </a>
+            </div>
+            {% if songs %}
+                <ol style="list-style: none; padding: 0;">
+                    {% for song in songs %}
+                        <li style="font-size: 20px; display: flex; align-items: center; margin-bottom: 20px; border: 1px solid #ddd; padding: 10px;">
+                            <img src="{{ url_for('static', filename=song.thumbnail_path.split('static')[1].replace('\\', '/')) }}" alt="{{ song.name }} Thumbnail"
+                                style="width: 150px; height: 150px; margin-right: 20px;">
+                            <div>
+                                <p>{{ song.name }}</p>
+                                <audio controls>
+                                    <source src="{{ url_for('static', filename=song.song_path.split('static')[1].replace('\\', '/')) }}" type="audio/mp3">
+                                </audio>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <form method="post" action="{{ url_for('remove_song_from_playlist', playlist_id=playlist.playlist_id, song_id=song.song_id) }}">
+                                    <button type="submit" class="btn btn-danger" value="Remove" style="margin-right: 10px;"> Remove </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No songs found for this Playlist.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

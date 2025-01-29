@@ -1,0 +1,64 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+View Song - Music Streaming Service
+{% endblock %}
+
+{% block style %}
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .box_display_song {
+        background-color: #E1E1E1;
+        color: black;
+        border-color: black;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid;
+        width: 650px;
+        height: auto;
+        margin: auto;
+        border-radius: 10px;
+        font-family: 'Akaya Kanadaka', sans-serif;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h2>View Songs</h2>
+    <div class="box_display_song">
+        <div class="insidebox1">
+            <div class="song-details-info">
+                <h5>Creator: {{ album.creator.artist_name }}</h5>
+                <h5>Release Date: {{ album.release_date.year }}</h5>
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ url_for('static', filename=album.thumbnail_path.split('static')[1].replace('\\', '/')) }}" alt="{{ album.name }} Thumbnail"
+                    style="width: 600px; height: 200px;">
+            <h3>{{ album.name }} </h3>
+            </div>
+            {% if songs %}
+                <ol style="list-style: none; padding: 0;">
+                    {% for song in songs %}
+                        <li style="font-size: 20px; display: flex; align-items: center; margin-bottom: 20px; border: 1px solid #ddd; padding: 10px;">
+                            <img src="{{ url_for('static', filename=song.thumbnail_path.split('static')[1].replace('\\', '/')) }}" alt="{{ song.name }} Thumbnail"
+                                style="width: 150px; height: 150px; margin-right: 20px;">
+                            <div>
+                                <p>{{ song.name }}</p>
+                                <audio controls>
+                                    <source src="{{ url_for('static', filename=song.song_path.split('static')[1].replace('\\', '/')) }}" type="audio/mp3">
+                                </audio>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No songs found for this album.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
